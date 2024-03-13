@@ -9,3 +9,5 @@
 [komentorivi.txt](./kurssit/ot2023/laskarit/viikko1/komentorivi.txt)
 
 [Requirements Definition](./memorygame/RequirementDefinition.md)
+
+[Tuntikirjanpito](./memorygame/tuntikirjanpito.md)
