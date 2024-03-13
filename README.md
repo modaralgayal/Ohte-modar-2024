@@ -1,4 +1,8 @@
 # ohte-modar-2024
 
-**This is my project**
-__It will be a memory game__
+**Exercises**
+
+### Viikko 1
+
+[gitlog.txt](./kurssit/ot2023/laskarit/viikko1/gitlog.txt)
+[komentorivi.txt](./kurssit/ot2023/laskarit/viikko1/komentorivi.txt)
