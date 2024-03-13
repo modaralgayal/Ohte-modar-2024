@@ -1,0 +1,84 @@
+commit 26c92f37c776e5c15d3f7dd5cd60989484cbcb4a
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:57:38 2024 +0200
+
+    teht11
+
+ kurssit/ot2023/viikko1/file3/txt3 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e6dfb7b4346804509bcebcb73bcf17d2bca79678
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:50:21 2024 +0200
+
+    files added
+
+ kurssit/ot2023/viikko1/eka.txt      | 3 +++
+ kurssit/ot2023/viikko1/tiedosto.txt | 1 -
+ kurssit/ot2023/viikko1/toinen.txt   | 1 -
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+commit 1342c7a985b63dda1258d1cad03f05ffef5efbb8
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:43:54 2024 +0200
+
+    teht 7
+
+ kurssit/ot2023/viikko1/kolmas.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b5db80f7bf231e5add33e1c8bcd6e605b50e26a1
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:41:07 2024 +0200
+
+    teht6
+
+ kurssit/ot2023/viikko1/kolmas.txt    | 1 +
+ kurssit/ot2023/viikko1/stuff/stuffia | 0
+ kurssit/ot2023/viikko1/toinen.txt    | 1 +
+ 3 files changed, 2 insertions(+)
+
+commit bc657c45299b08b85149caf7f04bba6deaf75224
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:39:58 2024 +0200
+
+    kolmas
+
+ kurssit/ot2023/viikko1/kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 99cfbe06842ff627e4705038bf82c249d9690d50
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:39:09 2024 +0200
+
+    muutos ja lisäys
+
+ kurssit/ot2023/viikko1/tiedosto.txt | 1 +
+ kurssit/ot2023/viikko1/toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit a849788152f9f8192e5199b29eb8bac2e103422c
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Wed Mar 13 10:37:57 2024 +0200
+
+    tiedosto.txt luotu
+
+ kurssit/ot2023/viikko1/tiedosto.txt                |   0
+ kurssit/ot2023/viikko1/unicafe/.coveragerc         |   3 +
+ kurssit/ot2023/viikko1/unicafe/poetry.lock         | 208 +++++++++++++++++++++
+ kurssit/ot2023/viikko1/unicafe/pyproject.toml      |  16 ++
+ kurssit/ot2023/viikko1/unicafe/src/index.py        |  16 ++
+ kurssit/ot2023/viikko1/unicafe/src/kassapaate.py   |  47 +++++
+ kurssit/ot2023/viikko1/unicafe/src/maksukortti.py  |  22 +++
+ .../ot2023/viikko1/unicafe/src/tests/__init__.py   |   0
+ .../viikko1/unicafe/src/tests/maksukortti_test.py  |   9 +
+ 9 files changed, 321 insertions(+)
+
+commit ee564f74379c586ee7b28fd0459ff4590e885205
+Author: modar_algayal <mudar.algayal@helsinki.fi>
+Date:   Mon Mar 11 13:52:23 2024 +0200
+
+    first commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)

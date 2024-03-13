@@ -1,0 +1,15 @@
+kurssit
+└── ot2023
+    ├── laskarit
+    │   └── viikko1
+    │       └── teht11.txt
+    └── unicafe
+        ├── poetry.lock
+        ├── pyproject.toml
+        └── src
+            ├── index.py
+            ├── kassapaate.py
+            ├── maksukortti.py
+            └── tests
+                ├── __init__.py
+                └── maksukortti_test.py
