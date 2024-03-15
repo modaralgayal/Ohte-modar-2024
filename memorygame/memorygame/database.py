@@ -1,53 +1,57 @@
 import sqlite3
+import json
 
-# Connect to the database
+cards_list_1 = [
+    {"name": "Ace of Spades", "definition": "The highest card in a standard deck of playing cards."},
+    {"name": "King of Hearts", "definition": "A face card in a standard deck of playing cards, typically depicted with a crown."},
+    {"name": "Queen of Diamonds", "definition": "A face card in a standard deck of playing cards, typically depicted with a crown and holding a scepter."}
+]
+
+cards_list_2 = [
+    {"name": "Jack of Clubs", "definition": "A face card in a standard deck of playing cards, typically depicted as a man holding a sword."},
+    {"name": "10 of Spades", "definition": "A numeric card in a standard deck of playing cards with ten symbols representing the suit of spades."},
+    {"name": "9 of Hearts", "definition": "A numeric card in a standard deck of playing cards with nine symbols representing the suit of hearts."}
+]
+
+cards_json_1 = json.dumps(cards_list_1)
+cards_json_2 = json.dumps(cards_list_2)
+
 connection = sqlite3.connect("mydata.db")
 cursor = connection.cursor()
 
-# Create the cards table
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS cards (
+    CREATE TABLE IF NOT EXISTS card_lists (
         id INTEGER PRIMARY KEY,
-        card_name TEXT NOT NULL,
-        card_definition TEXT NOT NULL
+        cards TEXT NOT NULL
     )
 """)
 
-cards_data = [
-    ("Ace of Spades", "The highest card in a standard deck of playing cards."),
-    ("King of Hearts", "A face card in a standard deck of playing cards, typically depicted with a crown."),
-    ("Queen of Diamonds", "A face card in a standard deck of playing cards, typically depicted with a crown and holding a scepter."),
-]
-
-# Insert the cards into the cards table
-cursor.executemany("""
-    INSERT INTO cards (card_name, card_definition)
-    VALUES (?, ?)
-""", cards_data)
+cursor.execute("""
+    INSERT INTO card_lists (cards) VALUES (?)
+""", (cards_json_1,))
 
 cursor.execute("""
-    SELECT card_name, card_definition
-    FROM cards
-""")
+    INSERT INTO card_lists (cards) VALUES (?)
+""", (cards_json_2,))
 
-cards = cursor.fetchall()
-
-for card in cards:
-    print("Card:", card[0])
-    print("Definition:", card[1])
-    print()
-
-
-# Create the games table
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS games (
-        id INTEGER PRIMARY KEY,
-        game_name TEXT NOT NULL,
-        card_pack_id INTEGER,
-        FOREIGN KEY (card_pack_id) REFERENCES cards(id)
-    )
-""")
-
-# Commit changes and close connection
 connection.commit()
+
+cursor.execute("""
+    SELECT cards
+    FROM card_lists
+""")
+
+cards_json_rows = cursor.fetchall()
+
+retrieved_cards_lists = [json.loads(row[0]) for row in cards_json_rows]
+
 connection.close()
+
+print("Retrieved Lists of Cards:")
+for index, cards_list in enumerate(retrieved_cards_lists, start=1):
+    print(f"List {index}:")
+    for card in cards_list:
+        print("Name:", card["name"])
+        print("Definition:", card["definition"])
+        print()
+    print()
