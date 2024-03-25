@@ -4,6 +4,8 @@
 
 [Viikko 2](./kurssit/ot2023/laskarit/viikko2/)
 
+[Viikko 3](./kurssit/ot2023/laskarit/viikko3/)
+
 [Requirements Definition](./memorygame/RequirementDefinition.md)
 
 [Tuntikirjanpito](./memorygame/tuntikirjanpito.md)
