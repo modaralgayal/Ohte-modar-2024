@@ -1,9 +1,7 @@
 import json
 import sqlite3
 
-
 class HandlePacks:
-
     def __init__(self):
         self.connection = sqlite3.connect("mydata.db")
         self.cursor = self.connection.cursor()
@@ -25,12 +23,11 @@ class HandlePacks:
             """
             INSERT INTO card_lists (pack_name, card_pack) VALUES (?, ?)
             """,
-            (pack_name, card_list),
+            (pack_name.lower(), card_list),
         )
         self.connection.commit()
 
     def get_packs(self):
-
         self.cursor.execute(
             """ 
             SELECT pack_name, card_pack
@@ -39,7 +36,18 @@ class HandlePacks:
         )
         cards_json_rows = self.cursor.fetchall()
 
-        retrieved_cards_lists = [(row[0], json.loads(row[1])) for row in cards_json_rows]
-        self.connection.commit()
-        self.connection.close()
+        retrieved_cards_lists = [
+            (row[0], json.loads(row[1])) for row in cards_json_rows
+        ]
+        
         return retrieved_cards_lists
+
+    def delete_pack(self, name):
+        self.cursor.execute(
+            """
+            DELETE FROM card_lists
+            WHERE pack_name = ?
+            """,
+            (name.lower(),),
+        )
+        self.connection.commit()
