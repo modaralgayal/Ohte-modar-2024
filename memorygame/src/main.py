@@ -4,6 +4,38 @@ from display_packs import display_packs_layout
 from services import HandlePacks
 
 
+def memory_game_layout(cards):
+    sg.theme("DarkGrey5")
+
+    layout = [
+        [sg.Text("Memory Game", font=("Helvetica", 20))],
+        [sg.Text("Click on a card to reveal its definition.", font=("Helvetica", 12))],
+        [
+            sg.Button("◄", size=(3, 1), font=("Helvetica", 12), key="-PREV-"),
+            sg.Text(
+                "",
+                size=(30, 1),
+                font=("Helvetica", 12),
+                justification="center",
+                key="-CARD-",
+            ),
+            sg.Button("►", size=(3, 1), font=("Helvetica", 12), key="-NEXT-"),
+        ],
+        [
+            sg.Text(
+                "",
+                font=("Helvetica", 12),
+                size=(40, 1),
+                justification="center",
+                key="-DEFINITION-",
+            )
+        ],
+        [sg.Button("Back To Menu", size=(15, 1), font=("Helvetica", 12), key="-BACK-")],
+    ]
+
+    return layout
+
+
 def main():
     # Initial layout
     layout, _ = display_packs_layout()
@@ -54,7 +86,7 @@ def main():
                 layout, Cardpacks = display_packs_layout()
                 window = sg.Window("Memory Game", layout, size=(600, 500))
                 current_layout = "display_packs"
-            
+
         elif current_layout == "display_packs":
             if event == "-TREE-":
                 selected_item = values["-TREE-"]
