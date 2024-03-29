@@ -1,6 +1,7 @@
 import json
 import sqlite3
 
+
 class HandlePacks:
     def __init__(self):
         self.connection = sqlite3.connect("mydata.db")
@@ -36,18 +37,30 @@ class HandlePacks:
         )
         cards_json_rows = self.cursor.fetchall()
 
-        retrieved_cards_lists = [
-            (row[0], json.loads(row[1])) for row in cards_json_rows
-        ]
+        retrieved_cards_lists = []
+        for row in cards_json_rows:
+            pack_name = row[0]
+            card_pack = json.loads(row[1])
+            retrieved_cards_lists.append([pack_name, card_pack])
         
+        print(retrieved_cards_lists)
+
         return retrieved_cards_lists
 
     def delete_pack(self, name):
-        self.cursor.execute(
+        (self.cursor.execute(
             """
-            DELETE FROM card_lists
-            WHERE pack_name = ?
-            """,
-            (name.lower(),),
-        )
+            DELETE FROM card_lists WHERE pack_name = ?
+            """
+            ,
+            (name,)
+        ))
+
         self.connection.commit()
+
+
+if __name__ == "__main__":
+    p = HandlePacks().get_packs()
+    for row in p:
+        print(row)
+        print()
