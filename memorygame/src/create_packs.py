@@ -5,7 +5,7 @@ def create_pack_layout():
     pack = HandlePacks()
 
     sg.theme('DarkGrey5')
-    custom_font = ('Arial', 12)  # Custom font and size
+    custom_font = ('Arial', 12) 
 
     layout = [
         [sg.Text("Enter card(s) to study:", font=custom_font)],

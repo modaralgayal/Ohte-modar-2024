@@ -24,7 +24,9 @@ def display_packs_layout():
             key="-TREE-",
         )],
         [sg.Button("Delete Pack", disabled=True),
-         sg.Button("Create Pack")],
+         sg.Button("Create Pack"),
+         sg.Button("Play", disabled=True)
+         ],
     ]
 
     return layout, Cardpacks

@@ -1,49 +1,18 @@
 import PySimpleGUI as sg
 from create_packs import create_pack_layout
 from display_packs import display_packs_layout
+from memoryGame import memory_game_layout
 from services import HandlePacks
 
 
-def memory_game_layout(cards):
-    sg.theme("DarkGrey5")
-
-    layout = [
-        [sg.Text("Memory Game", font=("Helvetica", 20))],
-        [sg.Text("Click on a card to reveal its definition.", font=("Helvetica", 12))],
-        [
-            sg.Button("◄", size=(3, 1), font=("Helvetica", 12), key="-PREV-"),
-            sg.Text(
-                "",
-                size=(30, 1),
-                font=("Helvetica", 12),
-                justification="center",
-                key="-CARD-",
-            ),
-            sg.Button("►", size=(3, 1), font=("Helvetica", 12), key="-NEXT-"),
-        ],
-        [
-            sg.Text(
-                "",
-                font=("Helvetica", 12),
-                size=(40, 1),
-                justification="center",
-                key="-DEFINITION-",
-            )
-        ],
-        [sg.Button("Back To Menu", size=(15, 1), font=("Helvetica", 12), key="-BACK-")],
-    ]
-
-    return layout
-
-
 def main():
-    # Initial layout
     layout, _ = display_packs_layout()
 
     window = sg.Window("Memory Game", layout, size=(600, 500))
 
     current_layout = "display_packs"
     pack = HandlePacks()
+    Cardpacks = HandlePacks()
     cards = []
 
     while True:
@@ -92,8 +61,10 @@ def main():
                 selected_item = values["-TREE-"]
                 if selected_item:
                     window["Delete Pack"].update(disabled=False)
+                    window["Play"].update(disabled=False)
                 else:
                     window["Delete Pack"].update(disabled=True)
+                    window["Play"].update(disabled=True)
 
             elif event == "Delete Pack":
                 selected_item = values["-TREE-"][0]
@@ -107,8 +78,21 @@ def main():
                 layout, Cardpacks = create_pack_layout()
                 window = sg.Window("Memory Game", layout, size=(800, 500))
                 current_layout = "create_pack"
-            else:
-                pass  # Handle events specific to display packs layout
+            elif event == "Play":
+                selected_item = values["-TREE-"]
+                window.close()
+                layout, _ = memory_game_layout(selected_item)
+                window = sg.Window("Memory Game", layout, size=(600, 500))
+                current_layout == "Play the Game"
+        elif current_layout == "Play the Game":
+            if event == "Back To Menu":
+                window.close()
+                layout, Cardpacks = display_packs_layout()
+                window = sg.Window("Memory Game", layout, size=(600, 500))
+                current_layout = "display_packs"
+
+        else:
+            pass  # Handle events specific to display packs layout
 
         window.refresh()
 

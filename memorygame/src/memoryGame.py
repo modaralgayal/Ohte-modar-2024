@@ -1,5 +1,8 @@
-import PySimpleGUI as sg
 from random import shuffle
+
+import PySimpleGUI as sg
+from services import HandlePacks
+
 
 def extract_cards_and_definitions(pack):
     cards = []
@@ -8,11 +11,15 @@ def extract_cards_and_definitions(pack):
         pack_name, card_list = item
         shuffle(card_list)
         for card in card_list:
-            cards.append(card['name'])
-            definitions.append(card['definition'])
+            cards.append(card["name"])
+            definitions.append(card["definition"])
     return cards, definitions
 
-def memory_game_layout(pack):
+
+def memory_game_layout(name):
+    handle = HandlePacks()
+    pack = handle.get_pack(name[0])
+    print(pack)
     sg.theme("DarkGrey5")
 
     cards, definitions = extract_cards_and_definitions(pack)
@@ -49,10 +56,10 @@ def memory_game_layout(pack):
             break
         elif event == "-PREV-":
             index = (index - 1) % len(cards)
-            show_definition = False 
+            show_definition = False
         elif event == "-NEXT-":
             index = (index + 1) % len(cards)
-            show_definition = False 
+            show_definition = False
         elif event == "-CARD-":
             show_definition = not show_definition
 
@@ -64,8 +71,7 @@ def memory_game_layout(pack):
 
     window.close()
 
+
 if __name__ == "__main__":
-    pack = ['champions league', [{'name': 'Real Madrid ', 'definition': 'Best team'}, 
-                                  {'name': 'Man City', 'definition': 'bruh too good'}, 
-                                  {'name': 'Arsenal', 'definition': 'Lol Aint winning'}]], 
-    memory_game_layout(pack)
+    name = ("champions league",)
+    memory_game_layout(name)
