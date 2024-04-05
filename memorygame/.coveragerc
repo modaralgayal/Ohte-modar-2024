@@ -1,0 +1,3 @@
+[run]
+source = src
+omit = src/**/__init__.py,src/tests/**,src/create_packs.py,src/display_packs.py,src/main.py,src/memoryGame.py

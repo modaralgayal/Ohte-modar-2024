@@ -8,3 +8,4 @@
 | 28.3  | 1 h   | Pack deleting works                                                   |
 | 29.3  | 2.5 h | UI is becoming more complete, game is playable but not yet integrated |
 | 30.3  | 3 h   | UI Ready + Tests ready for app                                        |
+| Sum   | 16 h  |
