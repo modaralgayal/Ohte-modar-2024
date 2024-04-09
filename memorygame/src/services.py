@@ -69,14 +69,11 @@ class HandlePacks:
         return retrieved_cards_list
 
     def delete_pack(self, name):
-        try:
-            self.cursor.execute(
-                """
+        self.cursor.execute(
+            """
                 DELETE FROM card_lists WHERE pack_name = ?
                 """,
-                (name,),
-            )
-            self.connection.commit()
-        except sqlite3.Error as e:
-            return f"Error deleting pack: {e}"
-            # Handle the error as needed, such as logging it or showing a message to the user
+            (name,),
+        )
+        self.connection.commit()
+        # Handle the error as needed, such as logging it or showing a message to the user
