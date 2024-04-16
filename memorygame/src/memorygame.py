@@ -1,14 +1,18 @@
+""" UI for the game itself """
+
 from random import shuffle
 
 import PySimpleGUI as sg
-from services import HandlePacks
+
+from .services import HandlePacks
 
 
 def extract_cards_and_definitions(pack):
+    """organizes fetched pack"""
     cards = []
     definitions = []
     for item in pack:
-        pack_name, card_list = item
+        _, card_list = item
         shuffle(card_list)
         for card in card_list:
             cards.append(card["name"])
@@ -17,6 +21,7 @@ def extract_cards_and_definitions(pack):
 
 
 def memory_game_layout(name):
+    """Memory game layout"""
     handle = HandlePacks()
     pack = handle.get_pack(name[0])
     print(pack)
@@ -46,11 +51,11 @@ def memory_game_layout(name):
 
     window = sg.Window("Memory Game", layout, size=(600, 500))
 
-    index = 0  # Index of current card
+    index = 0
     show_definition = False
 
     while True:
-        event, values = window.read()
+        event, _ = window.read()
 
         if event in (sg.WINDOW_CLOSED, "-BACK-"):
             break
@@ -63,7 +68,6 @@ def memory_game_layout(name):
         elif event == "-CARD-":
             show_definition = not show_definition
 
-        # Update button text based on current state
         if show_definition:
             window["-CARD-"].update(definitions[index])
         else:

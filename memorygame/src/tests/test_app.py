@@ -1,7 +1,10 @@
+""" Tests for app """
+
 from ..services import HandlePacks
 
 
 def test_add_pack():
+    """ Test pack addition """
     handler = HandlePacks()
     length_1 = len(handler.get_packs())
     handler.add_pack(
@@ -16,6 +19,7 @@ def test_add_pack():
 
 
 def test_get_pack():
+    """ Test pack retrieval """
     handler = HandlePacks()
     pack = handler.get_pack("Gadgets")
 
@@ -27,6 +31,7 @@ def test_get_pack():
 
 
 def test_delete_pack():
+    """ Test pack deletion """
     handler = HandlePacks()
 
     handler.delete_pack("Gadgets")

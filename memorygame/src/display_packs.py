@@ -1,32 +1,41 @@
+""" Main page where the pack titles are displayed along with their titles """
+
 import PySimpleGUI as sg
-from services import HandlePacks
+from .services import HandlePacks
+
 
 def display_packs_layout():
-    Cardpacks = HandlePacks()
-    card_packs = Cardpacks.get_packs()
-    sg.theme('DarkGrey5')
+    """ UI Display function """
+    cardpacks = HandlePacks()
+    card_packs = cardpacks.get_packs()
+    sg.theme("DarkGrey5")
 
-    treeData = sg.TreeData()
+    treedata = sg.TreeData()
     for pack_name, card_pack in card_packs:
-        treeData.insert("", str(pack_name), str(pack_name), [], icon=None)
+        treedata.insert("", str(pack_name), str(pack_name), [], icon=None)
         for card in card_pack:
             card_name = card["name"]
-            treeData.insert(str(pack_name), str(card_name), str(card_name), [], icon=None)
+            treedata.insert(
+                str(pack_name), str(card_name), str(card_name), [], icon=None
+            )
 
     layout = [
         [sg.Text("All your Packs:", font=("Calibri", 24))],
-        [sg.Tree(
-            treeData,
-            font=("Helvetica", 16),
-            col0_width=30,
-            enable_events=True,
-            show_expanded=False,
-            key="-TREE-",
-        )],
-        [sg.Button("Delete Pack", disabled=True),
-         sg.Button("Create Pack"),
-         sg.Button("Play", disabled=True)
-         ],
+        [
+            sg.Tree(
+                treedata,
+                font=("Helvetica", 16),
+                col0_width=30,
+                enable_events=True,
+                show_expanded=False,
+                key="-TREE-",
+            )
+        ],
+        [
+            sg.Button("Delete Pack", disabled=True),
+            sg.Button("Create Pack"),
+            sg.Button("Play", disabled=True),
+        ],
     ]
 
-    return layout, Cardpacks
+    return layout, cardpacks
