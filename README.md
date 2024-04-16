@@ -16,31 +16,38 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 1. Download dependencies:
 
-   `poetry install`
+   ```bash
+   poetry install
+   ```
 
 2. Build the app:
 
-   `poetry run invoke build`
+   ```bash
+   poetry run invoke build
+   ```
 
 3. Start the app:
 
-   `poetry run invoke start`
+   ```bash
+   poetry run invoke start
+   ```
 
 ## Terminal Commands
 
 ### Starting application
 
-    `poetry run invoke start`
+    poetry run invoke start
 
 ### Testing
 
-    `poetry run invoke coverage`
+    poetry run invoke coverage
 
 ### Testing percentage
 
-    `poetry run invoke coverage-report`
-    `poetry run invoke report`
+    poetry run invoke coverage-report
+
+    poetry run invoke report
 
 ### Pylint
 
-    `poetry run invoke lint`
+    poetry run invoke lint
