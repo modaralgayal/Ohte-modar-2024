@@ -1,6 +1,6 @@
 """ UI component for creating pack """
 import PySimpleGUI as sg
-from .services import HandlePacks
+from services import HandlePacks
 
 
 def create_pack_layout():

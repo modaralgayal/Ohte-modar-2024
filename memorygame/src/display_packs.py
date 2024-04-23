@@ -1,7 +1,7 @@
 """ Main page where the pack titles are displayed along with their titles """
 
 import PySimpleGUI as sg
-from .services import HandlePacks
+from services import HandlePacks
 
 
 def display_packs_layout():

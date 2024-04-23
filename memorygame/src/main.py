@@ -1,13 +1,14 @@
 """ Main component """
+
 import PySimpleGUI as sg
-from .create_packs import create_pack_layout
-from .display_packs import display_packs_layout
-from .memorygame import memory_game_layout
-from .services import HandlePacks
+from create_packs import create_pack_layout
+from display_packs import display_packs_layout
+from memory_game import create_memory_game_layout, run_memory_game
+from services import HandlePacks
 
 
 def main():
-    """ Main function """
+    """Main function"""
     layout, _ = display_packs_layout()
 
     window = sg.Window("Memory Game", layout, size=(600, 500))
@@ -23,7 +24,7 @@ def main():
         if event in (None, "Exit"):
             break
 
-        if current_layout == "create_pack":
+        elif current_layout == "create_pack":
             if event == "Back To Menu":
                 window.close()
                 layout, cardpacks = display_packs_layout()
@@ -82,19 +83,20 @@ def main():
                 current_layout = "create_pack"
             elif event == "Play":
                 selected_item = values["-TREE-"]
-                window.close()
-                layout, _ = memory_game_layout(selected_item)
-                window = sg.Window("Memory Game", layout, size=(600, 500))
                 current_layout == "Play the Game"
-        elif current_layout == "Play the Game":
-            if event == "Back To Menu":
                 window.close()
-                layout, cardpacks = display_packs_layout()
+                layout = create_memory_game_layout()
                 window = sg.Window("Memory Game", layout, size=(600, 500))
-                current_layout = "display_packs"
+                done = run_memory_game(window, selected_item)
+                if done == "Exit":
+                    window.close()
+                    layout, _ = display_packs_layout()
+                    window = sg.Window("Memory Game", layout, size=(600, 500))
+                    current_layout = "display_packs"
+
 
         else:
-            pass  # Handle events specific to display packs layout
+            pass
 
         window.refresh()
 
