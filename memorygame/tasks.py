@@ -19,3 +19,7 @@ def report(ctx):
 @task()
 def lint(ctx):
     ctx.run("pylint src", pty=True)
+
+@task
+def build(ctx):
+    ctx.run("")

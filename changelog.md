@@ -16,8 +16,11 @@
 - User UI nearly done, most desired user actions can be done
 - User can add packs, delete them, and play the memory game on the UI.
 
-
 ## Week 4
 
 - Fixed pylint errors, improved code quality
 - Created sequence diagram for app
+
+## Week 5
+
+- Refactored many parts of the code for better functionality

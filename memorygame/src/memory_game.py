@@ -1,3 +1,4 @@
+""" Memory Game """
 from random import shuffle
 
 import PySimpleGUI as sg

@@ -10,7 +10,7 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 [ChangeLog](./changelog.md)
 
-[Sekvenssikaavio](./memorygame/game_sequence.md)
+[Architecture Description](./memorygame/game_sequence.md)
 
 ## Download Instructions
 
@@ -20,13 +20,7 @@ The app is a memory game where a user can create his or her own packs of cards, 
    poetry install
    ```
 
-2. Build the app:
-
-   ```bash
-   poetry run invoke build
-   ```
-
-3. Start the app:
+2. Start the app:
 
    ```bash
    poetry run invoke start
