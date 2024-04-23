@@ -4,13 +4,13 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 ## Documentation
 
-[Requirements Definition](./memorygame/RequirementDefinition.md)
+[Requirements Definition](./memorygame/src/documentation/RequirementDefinition.md)
 
-[Tuntikirjanpito](./memorygame/tuntikirjanpito.md)
+[Tuntikirjanpito](./memorygame/src/documentation/tuntikirjanpito.md)
 
-[ChangeLog](./changelog.md)
+[ChangeLog](./memorygame/src/documentation/changelog.md)
 
-[Architecture Description](./memorygame/game_sequence.md)
+[Architecture Description](./memorygame/src/documentation/arkkitehtuuri.md)
 
 ## Download Instructions
 
