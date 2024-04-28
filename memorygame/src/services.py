@@ -1,12 +1,14 @@
 """
 These are the services responsible for communicating with the database
 """
+
 import json
 import sqlite3
 
 
 class HandlePacks:
-    """ This class handles all the sql databse operations """
+    """This class handles all the sql databse operations"""
+
     def __init__(self):
         self.connection = sqlite3.connect("mydata.db")
         self.cursor = self.connection.cursor()
@@ -22,7 +24,7 @@ class HandlePacks:
         )
 
     def add_pack(self, pack_name, cardpack):
-        """ Adds a pack of cards to the databse, which the user creates and can play later """
+        """Adds a pack of cards to the databse, which the user creates and can play later"""
         print("initially passed")
         print(cardpack)
         card_list = json.dumps(cardpack)
@@ -36,7 +38,7 @@ class HandlePacks:
         self.connection.commit()
 
     def get_packs(self):
-        """ The other functions call this to display all the user's games """
+        """The other functions call this to display all the user's games"""
         self.cursor.execute(
             """
             SELECT pack_name, card_pack
@@ -54,7 +56,7 @@ class HandlePacks:
         return retrieved_cards_lists
 
     def get_pack(self, name):
-        """ Called by other functions to get one specific pack """
+        """Called by other functions to get one specific pack"""
         print(name)
         self.cursor.execute(
             """
@@ -76,7 +78,7 @@ class HandlePacks:
         return retrieved_cards_list
 
     def delete_pack(self, name):
-        """ Delete a pack """
+        """Delete a pack"""
         self.cursor.execute(
             """
                 DELETE FROM card_lists WHERE pack_name = ?

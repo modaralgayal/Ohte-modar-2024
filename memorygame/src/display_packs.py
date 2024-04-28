@@ -11,8 +11,10 @@ def display_packs_layout():
     sg.theme("DarkGrey5")
 
     treedata = sg.TreeData()
+    #print("These are cardpacks:", card_packs)
     for pack_name, card_pack in card_packs:
         treedata.insert("", str(pack_name), str(pack_name), [], icon=None)
+        #print("This is the card_pack:", card_pack)
         for card in card_pack:
             card_name = card["name"]
             treedata.insert(
