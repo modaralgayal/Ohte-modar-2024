@@ -3,6 +3,8 @@ Here is a general description of the architecture
 [Architecture](UML%20class.png)
 
 
+Also a mermaid diagram:
+
 ```mermaid
 sequenceDiagram
     participant User
