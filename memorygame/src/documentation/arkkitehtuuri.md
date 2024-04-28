@@ -1,3 +1,8 @@
+Here is a general description of the architecture
+
+[Architecture](UML%20class.png)
+
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -26,3 +31,6 @@ sequenceDiagram
     end
     User ->> App: Quits the Memory Game
 ```
+
+
+
