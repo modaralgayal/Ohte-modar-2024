@@ -16,6 +16,8 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 - [Release - 1](https://github.com/modaralgayal/ohte-modar-2024/releases/tag/release1)
 
+- [Release - 2](https://github.com/modaralgayal/ohte-modar-2024/releases/tag/release2)
+
 ## Download Instructions
 
 1. Download dependencies:
