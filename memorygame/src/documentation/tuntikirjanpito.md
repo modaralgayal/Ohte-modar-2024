@@ -10,4 +10,5 @@
 | 30.3  | 3 h    | UI Ready + Tests ready for app                                        |
 | 16.4  | 1 h    | Fixing pylint errors + Sequence diagram                               |
 | 23.4  | 1.5 h  | Refactoring The code, fixing problems                                 |
-| Sum   | 18.5 h |
+| 30.4  | 5 h    | Fixed many issues, added functionality                                |
+| Sum   | 23.5 h |

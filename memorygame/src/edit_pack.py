@@ -1,15 +1,17 @@
+""" This module edits exisiting Pack """
+import json
 import PySimpleGUI as sg
 from services.services import HandlePacks
-import json
+
 
 def edit_pack_layout(selected_pack):
     """UI Display function for editing a pack"""
     sg.theme("DarkGrey5")
     handler = HandlePacks()
-    pack_name, card_pack_json = handler.get_pack(selected_pack)[0]
+    _, card_pack_json = handler.get_pack(selected_pack)[0]
     card_pack = json.loads(card_pack_json)
     card_names = [f"{card['name']}: {card['definition']} " for card in card_pack]
-    print("This is the card_pack", card_pack)
+    #print("This is the card_pack", card_pack)
     custom_font = ("Arial", 12)
 
     treedata = sg.TreeData()
@@ -30,10 +32,9 @@ def edit_pack_layout(selected_pack):
             )
         ],
         [
-            sg.Button("Edit Card", disabled=True),
             sg.Button("Delete Card", disabled=True),
             sg.Button("New Card", key="-NEW_CARD-"),
-            sg.Button("Back"),
+            sg.Button("Back To Menu"),
         ],
         [
             sg.Text(

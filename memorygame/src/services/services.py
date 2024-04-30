@@ -26,8 +26,8 @@ class HandlePacks:
     def add_pack(self, pack_name, cardpack):
         print(pack_name, cardpack)
         """Adds a pack of cards to the databse, which the user creates and can play later"""
-        print("initially passed")
-        print(cardpack)
+        # print("initially passed")
+        # print(cardpack)
         card_list = json.dumps(cardpack)
 
         self.cursor.execute(
@@ -68,12 +68,11 @@ class HandlePacks:
             (name,),
         )
 
-        card_pack = self.cursor.fetchall()
+        card_pack_data = self.cursor.fetchall()  # Renamed variable to avoid confusion
         retrieved_cards_list = []
-        for row in card_pack:
+        for row in card_pack_data:
             pack_name = row[0]
-            print("This is the row", row[1])
-            card_pack = row[1]
+            card_pack = row[1]  # Extracting card_pack data from the row
             retrieved_cards_list.append([pack_name, card_pack])
 
         return retrieved_cards_list
@@ -92,14 +91,13 @@ class HandlePacks:
         """Delete a specific card from a pack"""
         pack = self.get_pack(pack_name)
         print("Card to be deleted", card_name)
-        if not pack:
-            return False
 
-        pack_contents = pack[0][1]  # Extract pack contents
+        pack_contents = json.loads(pack[0][1])  # Extract pack contents
 
         print("Contents of the pack", pack_contents)
 
         for card in pack_contents:
+            print("This is card name: ", card)
             if card["name"] == card_name:
                 pack_contents.remove(card)
                 self.cursor.execute(
@@ -112,23 +110,16 @@ class HandlePacks:
                 )
                 self.connection.commit()
                 return True
-        # Checking if deletetion is successful
-        pack = self.get_pack(pack_name)
-        print("This is the new pack:", pack)
-        return False
+
 
     def add_card_to_existing_pack(self, pack_name, card):
 
         pack = self.get_pack(pack_name)
-        if not pack:
-            print("Pack not found, something went wrong")
-            return False
 
-        pack_contents = pack[0][1]
-
-        pack_contents.append(card)
-
+        pack_contents_json = pack[0][1]  # Retrieve pack contents as JSON string
+        pack_contents = json.loads(pack_contents_json)
         print("Contents of the new pack: ", pack_contents)
+        pack_contents.append(card)
 
         # Update the pack in the database
         self.cursor.execute(
@@ -137,42 +128,8 @@ class HandlePacks:
             SET card_pack = ?
             WHERE pack_name = ?
             """,
-            (str(pack_contents), str(pack_name)),
+            (json.dumps(pack_contents), str(pack_name)),
         )
         self.connection.commit()  # Commit the transaction
 
         return True
-
-
-if __name__ == "__main__":
-    pack1 = "Animals", [
-        {"name": "Dog", "definition": "A domesticated carnivorous mammal."},
-        {"name": "Cat", "definition": "A small domesticated carnivorous mammal."},
-        {
-            "name": "Elephant",
-            "definition": "A large herbivorous mammal with a long trunk.",
-        },
-    ]
-
-    pack2 = "Fruits", [
-        {
-            "name": "Apple",
-            "definition": "A round fruit with red or green skin and a whitish flesh.",
-        },
-        {"name": "Banana", "definition": "A long curved fruit with a yellow skin."},
-        {
-            "name": "Orange",
-            "definition": "A round citrus fruit with a tough bright orange skin.",
-        },
-    ]
-
-    pack3 = "countries", [
-        {"name": "United States", "definition": "A country in North America."},
-        {"name": "United Kingdom", "definition": "A country in Europe."},
-        {"name": "Australia", "definition": "A country in Oceania."},
-    ]
-
-    handler = HandlePacks()
-    handler.add_pack(pack1[0], pack1[1])
-    handler.add_pack(pack2[0], pack2[1])
-    handler.add_pack(pack3[0], pack3[1])

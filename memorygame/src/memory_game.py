@@ -1,6 +1,6 @@
 """ Memory Game """
 from random import shuffle
-
+import json
 import PySimpleGUI as sg
 from services.services import HandlePacks
 
@@ -10,7 +10,9 @@ def extract_cards_and_definitions(pack):
     cards = []
     definitions = []
     for item in pack:
-        _, card_list = item
+        _, card_list_json = item
+        card_list = json.loads(card_list_json)
+        print(type(card_list))
         shuffle(card_list)
         for card in card_list:
             cards.append(card["name"])

@@ -1,5 +1,7 @@
 """ Main component """
 
+import json
+
 import PySimpleGUI as sg
 from create_packs import create_pack_layout
 from display_packs import display_packs_layout
@@ -79,7 +81,7 @@ def main():
 
             elif event == "Delete Pack":
                 selected_item = values["-TREE-"][0]
-                cardpacks.delete_pack(selected_item)
+                pack.delete_pack(selected_item)
                 window.close()
                 layout, _ = create_pack_layout()
                 window = sg.Window("Memory Game", layout, size=(800, 500))
@@ -107,7 +109,6 @@ def main():
 
             if values["-CARDS-"]:
                 selected_card = values["-CARDS-"][0]
-                window["Edit Card"].update(disabled=False)
                 window["Delete Card"].update(disabled=False)
 
             if event == "Edit Card":
@@ -121,7 +122,7 @@ def main():
                     pack.delete_card_from_pack(
                         pack_being_edited, selected_card.split(":")[0]
                     )
-                    card_pack = pack.get_pack(pack_being_edited)[0][1]
+                    card_pack = json.loads(pack.get_pack(pack_being_edited)[0][1])
                     card_names = [
                         f"{card['name']}: {card['definition']}" for card in card_pack
                     ]
@@ -144,15 +145,19 @@ def main():
                 window["-DEFINITION-"].update("")
                 pack.add_card_to_existing_pack(pack_being_edited, new_card)
                 print("Pack addition successful")
-                card_pack = pack.get_pack(pack_being_edited)[0][1]
+                card_pack_data = pack.get_pack(pack_being_edited)[0][1]
+                card_pack = json.loads(card_pack_data)
                 card_names = [
                     f"{card['name']}: {card['definition']}" for card in card_pack
                 ]
                 window["-CARDS-"].update(values=card_names)
 
             # go back to menu
-            elif event == "Back":
-                pass
+            elif event == "Back To Menu":
+                window.close()
+                layout, cardpacks = display_packs_layout()
+                window = sg.Window("Memory Game", layout, size=(600, 500))
+                current_layout = "display_packs"
 
         else:
             pass

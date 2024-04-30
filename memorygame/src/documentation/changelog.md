@@ -24,3 +24,7 @@
 ## Week 5
 
 - Refactored many parts of the code for better functionality
+
+## Week 6
+
+- Pack editing now possible. User is able to delete single cards from a pack and add a new card to an existing pack

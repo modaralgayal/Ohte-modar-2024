@@ -1,5 +1,7 @@
 """ Tests for app """
 
+import json
+
 from ..services.services import HandlePacks
 
 
@@ -24,9 +26,37 @@ def test_get_pack():
     pack = handler.get_pack("Gadgets")
 
     assert pack[0][0] == "Gadgets"
-    assert pack[0][1] == [
+    assert json.loads(pack[0][1]) == [
         {"name": "tv", "definition": "Big screen"},
         {"name": "Computer", "definition": "small screen and keyboard with mouse"},
+    ]
+
+
+def test_deleting_one_card():
+    """Test deleting one card"""
+    handler = HandlePacks()
+    handler.delete_card_from_pack(
+        "Gadgets",
+        "tv",
+    )
+
+    pack = handler.get_pack("Gadgets")
+    assert json.loads(pack[0][1]) == [
+        {"name": "Computer", "definition": "small screen and keyboard with mouse"},
+    ]
+
+
+def test_adding_to_existing_pack():
+    """Test adding existing pack"""
+    handler = HandlePacks()
+
+    handler.add_card_to_existing_pack(
+        "Gadgets", {"name": "tv", "definition": "Big screen"}
+    )
+    pack = handler.get_pack("Gadgets")
+    assert json.loads(pack[0][1]) == [
+        {"name": "Computer", "definition": "small screen and keyboard with mouse"},        
+        {"name": "tv", "definition": "Big screen"}
     ]
 
 

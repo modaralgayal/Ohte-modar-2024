@@ -1,2 +1,3 @@
 [MASTER]
 ignore-paths=src/tests/.
+disable=E0401

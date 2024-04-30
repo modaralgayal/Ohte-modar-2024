@@ -63,7 +63,11 @@ suggestion-mode=yes
 unsafe-load-any-extension=no
 
 
+pylintUseMinimalCheckers=yes
+
+
 [MESSAGES CONTROL]
+
 
 # Only show warnings with the listed confidence levels. Leave empty to show
 # all. Valid levels: HIGH, INFERENCE, INFERENCE_FAILURE, UNDEFINED.
@@ -85,7 +89,8 @@ disable=raw-checker-failed,
         suppressed-message,
         useless-suppression,
         deprecated-pragma,
-        use-symbolic-message-instead
+        use-symbolic-message-instead,
+        import-error
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -456,7 +461,7 @@ min-similarity-lines=4
 
 # List of modules that can be imported at any level, not just the top level
 # one.
-allow-any-import-level=
+allow-any-import-level=yes
 
 # Allow wildcard imports from modules that define __all__.
 allow-wildcard-with-all=no
