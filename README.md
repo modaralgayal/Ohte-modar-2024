@@ -12,12 +12,9 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 [Architecture Description](./memorygame/src/documentation/arkkitehtuuri.md)
 
-
 ## Release
 
 - [Release - 1](https://github.com/modaralgayal/ohte-modar-2024/releases/tag/release1)
-
-
 
 ## Download Instructions
 
@@ -37,18 +34,30 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 ### Starting application
 
-    poetry run invoke start
+    Run this from the memorygame/ directory
+
+```bash
+ poetry run invoke start
+```
 
 ### Testing
 
-    poetry run invoke coverage
+```bash
+ poetry run invoke coverage
+```
 
 ### Testing percentage
 
-    poetry run invoke coverage-report
+```bash
+ poetry run invoke coverage-report
+```
 
-    poetry run invoke report
+```bash
+ poetry run invoke report
+```
 
 ### Pylint
 
-    poetry run invoke lint
+```bash
+ poetry run invoke lint
+```
