@@ -34,7 +34,7 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 ### Starting application
 
-    Run this from the memorygame/ directory
+Run this from the memorygame/ directory
 
 ```bash
  poetry run invoke start
