@@ -68,7 +68,7 @@ class HandlePacks:
         )
 
         card_pack = self.cursor.fetchall()
-        print("This is the cardpack", card_pack)
+        #print("This is the cardpack", card_pack)
         retrieved_cards_list = []
         for row in card_pack:
             pack_name = row[0]
@@ -86,3 +86,35 @@ class HandlePacks:
             (name,),
         )
         self.connection.commit()
+    
+    def delete_card_from_pack(self, pack_name, card_name):
+        """Delete a specific card from a pack"""
+        pack = self.get_pack(pack_name)
+        print("Card to be deleted", card_name)
+        if not pack:
+            return False  
+
+        pack_contents = pack[0][1]  # Extract pack contents
+
+        print("Contents of the pack", pack_contents)
+
+        for card in pack_contents:
+            if card["name"] == card_name:
+                pack_contents.remove(card)
+                self.cursor.execute(
+                    """
+                    UPDATE card_lists
+                    SET card_pack = ?
+                    WHERE pack_name = ?
+                    """,
+                    (json.dumps(pack_contents), pack_name),
+                )
+                self.connection.commit()
+                return True  
+        # Checking if deletetion is successful
+        pack = self.get_pack(pack_name)
+        print("This is the new pack:", pack)
+
+
+        return False  
+

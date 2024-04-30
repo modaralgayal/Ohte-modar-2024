@@ -2,7 +2,7 @@
 from random import shuffle
 
 import PySimpleGUI as sg
-from services import HandlePacks
+from services.services import HandlePacks
 
 
 def extract_cards_and_definitions(pack):

@@ -1,7 +1,7 @@
 """ Main page where the pack titles are displayed along with their titles """
 
 import PySimpleGUI as sg
-from services import HandlePacks
+from services.services import HandlePacks
 
 
 def display_packs_layout():
@@ -11,10 +11,8 @@ def display_packs_layout():
     sg.theme("DarkGrey5")
 
     treedata = sg.TreeData()
-    #print("These are cardpacks:", card_packs)
     for pack_name, card_pack in card_packs:
         treedata.insert("", str(pack_name), str(pack_name), [], icon=None)
-        #print("This is the card_pack:", card_pack)
         for card in card_pack:
             card_name = card["name"]
             treedata.insert(
@@ -37,6 +35,7 @@ def display_packs_layout():
             sg.Button("Delete Pack", disabled=True),
             sg.Button("Create Pack"),
             sg.Button("Play", disabled=True),
+            sg.Button("Edit Pack", disabled=True)
         ],
     ]
 

@@ -12,6 +12,13 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 [Architecture Description](./memorygame/src/documentation/arkkitehtuuri.md)
 
+
+## Release
+
+- [Release - 1](https://github.com/modaralgayal/ohte-modar-2024/releases/tag/release1)
+
+
+
 ## Download Instructions
 
 1. Download dependencies:

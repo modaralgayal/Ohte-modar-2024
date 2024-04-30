@@ -1,6 +1,6 @@
 """ Tests for app """
 
-from ..services import HandlePacks
+from ..services.services import HandlePacks
 
 
 def test_add_pack():

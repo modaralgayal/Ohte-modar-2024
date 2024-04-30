@@ -3,8 +3,9 @@
 import PySimpleGUI as sg
 from create_packs import create_pack_layout
 from display_packs import display_packs_layout
+from edit_pack import edit_pack_layout
 from memory_game import create_memory_game_layout, run_memory_game
-from services import HandlePacks
+from services.services import HandlePacks
 
 
 def main():
@@ -15,7 +16,6 @@ def main():
 
     current_layout = "display_packs"
     pack = HandlePacks()
-    cardpacks = HandlePacks()
     cards = []
 
     while True:
@@ -45,7 +45,6 @@ def main():
                     )
                     print(cards)
             elif event == "Create Pack":
-                # Show pack name input
                 window["-PACK_NAME-"].update(visible=True)
                 window["Confirm Pack Name"].update(visible=True)
 
@@ -65,9 +64,18 @@ def main():
                 if selected_item:
                     window["Delete Pack"].update(disabled=False)
                     window["Play"].update(disabled=False)
+                    window["Edit Pack"].update(disabled=False)
                 else:
                     window["Delete Pack"].update(disabled=True)
                     window["Play"].update(disabled=True)
+                    window["Edit Pack"].update(disabled=True)
+
+            elif event == "Edit Pack":
+                window.close()
+                pack_being_edited = values["-TREE-"][0]
+                layout, _ = edit_pack_layout(pack_being_edited)
+                window = sg.Window("Edit Pack", layout)
+                current_layout = "Edit Pack"
 
             elif event == "Delete Pack":
                 selected_item = values["-TREE-"][0]
@@ -76,6 +84,7 @@ def main():
                 layout, _ = create_pack_layout()
                 window = sg.Window("Memory Game", layout, size=(800, 500))
                 current_layout = "create_pack"
+
             elif event == "Create Pack":
                 window.close()
                 layout, cardpacks = create_pack_layout()
@@ -94,6 +103,37 @@ def main():
                     window = sg.Window("Memory Game", layout, size=(600, 500))
                     current_layout = "display_packs"
 
+        elif current_layout == "Edit Pack":
+
+            selected_card = values["-CARDS-"][0]
+            if selected_card:
+                window["Edit Card"].update(disabled=False)
+                window["Delete Card"].update(disabled=False)
+
+            if event == "Edit Card":
+                pass
+
+            # Delete a card
+            elif event == "Delete Card":
+                selected_card = values["-CARDS-"][0] if values["-CARDS-"] else None
+                if selected_card:
+
+                    pack.delete_card_from_pack(
+                        pack_being_edited, selected_card.split(":")[0]
+                    )
+                    card_pack = pack.get_pack(pack_being_edited)[0][1]
+                    card_names = [
+                        f"{card['name']}: {card['definition']} " for card in card_pack
+                    ]
+                    window["-CARDS-"].update(values=card_names)
+
+            # add card to existing pack
+            elif event == "Add Card":
+                pass
+
+            # go back to menu
+            elif event == "Back":
+                pass
 
         else:
             pass
