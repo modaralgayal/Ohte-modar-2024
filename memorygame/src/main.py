@@ -74,7 +74,7 @@ def main():
                 window.close()
                 pack_being_edited = values["-TREE-"][0]
                 layout, _ = edit_pack_layout(pack_being_edited)
-                window = sg.Window("Edit Pack", layout)
+                window = sg.Window("Edit Pack", layout, size=(800, 500))
                 current_layout = "Edit Pack"
 
             elif event == "Delete Pack":
@@ -105,8 +105,8 @@ def main():
 
         elif current_layout == "Edit Pack":
 
-            selected_card = values["-CARDS-"][0]
-            if selected_card:
+            if values["-CARDS-"]:
+                selected_card = values["-CARDS-"][0]
                 window["Edit Card"].update(disabled=False)
                 window["Delete Card"].update(disabled=False)
 
@@ -123,13 +123,32 @@ def main():
                     )
                     card_pack = pack.get_pack(pack_being_edited)[0][1]
                     card_names = [
-                        f"{card['name']}: {card['definition']} " for card in card_pack
+                        f"{card['name']}: {card['definition']}" for card in card_pack
                     ]
                     window["-CARDS-"].update(values=card_names)
 
             # add card to existing pack
-            elif event == "Add Card":
-                pass
+            elif event == "-NEW_CARD-":  # Check if the "Add Card" button is clicked
+                # Make the non-visible elements visible
+                window["-NAME_LABEL-"].update(visible=True)
+                window["-NAME-"].update(visible=True)
+                window["-DEFINITION_LABEL-"].update(visible=True)
+                window["-DEFINITION-"].update(visible=True)
+                window["-ADD_CARD-"].update(visible=True)
+
+            elif event == "-ADD_CARD-":
+                name = values["-NAME-"]
+                definition = values["-DEFINITION-"]
+                new_card = {"name": name, "definition": definition}
+                window["-NAME-"].update("")
+                window["-DEFINITION-"].update("")
+                pack.add_card_to_existing_pack(pack_being_edited, new_card)
+                print("Pack addition successful")
+                card_pack = pack.get_pack(pack_being_edited)[0][1]
+                card_names = [
+                    f"{card['name']}: {card['definition']}" for card in card_pack
+                ]
+                window["-CARDS-"].update(values=card_names)
 
             # go back to menu
             elif event == "Back":

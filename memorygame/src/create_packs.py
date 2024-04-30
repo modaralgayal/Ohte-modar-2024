@@ -1,10 +1,11 @@
 """ UI component for creating pack """
+
 import PySimpleGUI as sg
 from services.services import HandlePacks
 
 
 def create_pack_layout():
-    """ UI of the pack creation """
+    """UI of the pack creation"""
     pack = HandlePacks()
 
     sg.theme("DarkGrey5")

@@ -24,6 +24,7 @@ class HandlePacks:
         )
 
     def add_pack(self, pack_name, cardpack):
+        print(pack_name, cardpack)
         """Adds a pack of cards to the databse, which the user creates and can play later"""
         print("initially passed")
         print(cardpack)
@@ -68,11 +69,11 @@ class HandlePacks:
         )
 
         card_pack = self.cursor.fetchall()
-        #print("This is the cardpack", card_pack)
         retrieved_cards_list = []
         for row in card_pack:
             pack_name = row[0]
-            card_pack = json.loads(row[1])
+            print("This is the row", row[1])
+            card_pack = row[1]
             retrieved_cards_list.append([pack_name, card_pack])
 
         return retrieved_cards_list
@@ -86,13 +87,13 @@ class HandlePacks:
             (name,),
         )
         self.connection.commit()
-    
+
     def delete_card_from_pack(self, pack_name, card_name):
         """Delete a specific card from a pack"""
         pack = self.get_pack(pack_name)
         print("Card to be deleted", card_name)
         if not pack:
-            return False  
+            return False
 
         pack_contents = pack[0][1]  # Extract pack contents
 
@@ -110,11 +111,68 @@ class HandlePacks:
                     (json.dumps(pack_contents), pack_name),
                 )
                 self.connection.commit()
-                return True  
+                return True
         # Checking if deletetion is successful
         pack = self.get_pack(pack_name)
         print("This is the new pack:", pack)
+        return False
+
+    def add_card_to_existing_pack(self, pack_name, card):
+
+        pack = self.get_pack(pack_name)
+        if not pack:
+            print("Pack not found, something went wrong")
+            return False
+
+        pack_contents = pack[0][1]
+
+        pack_contents.append(card)
+
+        print("Contents of the new pack: ", pack_contents)
+
+        # Update the pack in the database
+        self.cursor.execute(
+            """
+            UPDATE card_lists
+            SET card_pack = ?
+            WHERE pack_name = ?
+            """,
+            (str(pack_contents), str(pack_name)),
+        )
+        self.connection.commit()  # Commit the transaction
+
+        return True
 
 
-        return False  
+if __name__ == "__main__":
+    pack1 = "Animals", [
+        {"name": "Dog", "definition": "A domesticated carnivorous mammal."},
+        {"name": "Cat", "definition": "A small domesticated carnivorous mammal."},
+        {
+            "name": "Elephant",
+            "definition": "A large herbivorous mammal with a long trunk.",
+        },
+    ]
 
+    pack2 = "Fruits", [
+        {
+            "name": "Apple",
+            "definition": "A round fruit with red or green skin and a whitish flesh.",
+        },
+        {"name": "Banana", "definition": "A long curved fruit with a yellow skin."},
+        {
+            "name": "Orange",
+            "definition": "A round citrus fruit with a tough bright orange skin.",
+        },
+    ]
+
+    pack3 = "countries", [
+        {"name": "United States", "definition": "A country in North America."},
+        {"name": "United Kingdom", "definition": "A country in Europe."},
+        {"name": "Australia", "definition": "A country in Oceania."},
+    ]
+
+    handler = HandlePacks()
+    handler.add_pack(pack1[0], pack1[1])
+    handler.add_pack(pack2[0], pack2[1])
+    handler.add_pack(pack3[0], pack3[1])

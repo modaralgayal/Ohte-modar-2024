@@ -5,7 +5,7 @@ from services.services import HandlePacks
 
 
 def display_packs_layout():
-    """ UI Display function """
+    """UI Display function"""
     cardpacks = HandlePacks()
     card_packs = cardpacks.get_packs()
     sg.theme("DarkGrey5")
@@ -35,7 +35,7 @@ def display_packs_layout():
             sg.Button("Delete Pack", disabled=True),
             sg.Button("Create Pack"),
             sg.Button("Play", disabled=True),
-            sg.Button("Edit Pack", disabled=True)
+            sg.Button("Edit Pack", disabled=True),
         ],
     ]
 
