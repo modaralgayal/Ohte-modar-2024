@@ -3,4 +3,4 @@ __pycache__
 mydata.db
 .coverage
 dist
-.gitignore
+gitignore
