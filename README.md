@@ -4,13 +4,13 @@ The app is a memory game where a user can create his or her own packs of cards, 
 
 ## Documentation
 
-[Requirements Definition](./memorygame/src/documentation/RequirementDefinition.md)
+[Requirements Definition](./memorygame/documentation/RequirementDefinition.md)
 
-[Tuntikirjanpito](./memorygame/src/documentation/tuntikirjanpito.md)
+[Tuntikirjanpito](./memorygame/documentation/tuntikirjanpito.md)
 
-[ChangeLog](./memorygame/src/documentation/changelog.md)
+[ChangeLog](./memorygame/documentation/changelog.md)
 
-[Architecture Description](./memorygame/src/documentation/arkkitehtuuri.md)
+[Architecture Description](./memorygame/documentation/arkkitehtuuri.md)
 
 ## Release
 
@@ -43,6 +43,7 @@ Run this from the memorygame/ directory
 ```
 
 ### Testing
+
 
 ```bash
  poetry run invoke coverage
